@@ -1,8 +1,12 @@
 from bs4 import BeautifulSoup
+from datetime import date
 import urllib2
 import json
+import argparse
 
 
+MIN_YEAR = 2010 # The NCAA stats pages only go back to 2010
+CURRENT_YEAR = date.today().year
 STAT_MAPPINGS = {
 	149: {'gm': 2, 'opp_fg': 3, 'opp_fga': 4, 'opp_fg_per': 5}, # defensive fg%
 	518: {'gm': 2, 'opp_3p_fga': 3, 'opp_3p_fg': 4, 'opp_3p_fg_per': 5}, # def 3pt fg%
@@ -14,16 +18,16 @@ STAT_MAPPINGS = {
 	286: {'gm': 2, 'tot_pf': 3, 'pfpg': 4, 'dq': 5} # fouls per game
 }
 
-def getUrl(statNum, pageNum):
-	return 'http://www.ncaa.com/stats/basketball-men/d1/current/team/{}/p{}'.format(statNum, pageNum)
+def getUrl(year, statNum, pageNum):
+	return 'http://www.ncaa.com/stats/basketball-men/d1/{}/team/{}/p{}'.format(year, statNum, pageNum)
 
 def getHtml(url):
 	req = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"}) 
 	return urllib2.urlopen(req)
 
-def getStats(statNum, teamMap, statMap):
+def getStats(year, statNum, teamMap, statMap):
 	for pageNum in [1,2,3,4,5,6,7]:
-		soup = BeautifulSoup(getHtml(getUrl(statNum, pageNum)), 'html.parser')
+		soup = BeautifulSoup(getHtml(getUrl(year, statNum, pageNum)), 'html.parser')
 		teams = soup.find_all('tr')
 		for teamHtml in teams:
 			name = teamHtml.find_next('a').string
@@ -37,10 +41,20 @@ def getStats(statNum, teamMap, statMap):
 					team[statName] = tds[index].string
 				teamMap[name] = team
 
+def year(year):
+	year = int(year)
+	if not MIN_YEAR <= year <= CURRENT_YEAR:
+		raise argparse.ArgumentTypeError("Year specified must be between {} and {}".format(MIN_YEAR, CURRENT_YEAR))
+	return year
+
 def main():
+	parser = argparse.ArgumentParser(description='Get defensive stats for a given year')
+	parser.add_argument('-y', '--year', type=year, help='Year (between {} and {})'.format(MIN_YEAR, CURRENT_YEAR), default=CURRENT_YEAR)
+	args = parser.parse_args()
+
 	teamMap = dict()
 	for statNum, statMap in STAT_MAPPINGS.iteritems():
-		getStats(statNum, teamMap, statMap)
+		getStats(args.year, statNum, teamMap, statMap)
 	print(json.dumps(teamMap))
 
 if __name__ == "__main__":

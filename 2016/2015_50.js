@@ -1,39 +1,39 @@
 function (game, team1, team2) {
+	// updated to 2016 CONF_SOS stats
 	var CONF_SOS = {
-    	"BIG12": 1,
-    	"BIGE": 2,
-    	"ACC": 3,
-    	"BIG10": 4,
-        "SEC": 5,
-    	"PAC12": 6,
-    	"ATL10": 7,
-    	"AAC": 8,
-    	"WCC": 9,
-        "MIDAM": 10,
-        "MWC": 11,
-    	"MVC": 12,
-    	"IND": 13,
-    	"BIGW": 14,
-    	"IVY": 15,
-    	"HORIZ": 16,
-    	"USA": 17,
-    	"PAT": 18,
-    	"COL": 19,
-    	"BELT": 20,
-    	"SUMM": 21,
-    	"MAAC": 22,
-    	"SOUTH": 23,
-    	"OVC": 24,
-    	"BSOU": 25,
-    	"NEA": 26,
-    	"BSKY": 27,
-    	"LAND": 28,
-    	"AEAST": 29,
-    	"ASUN": 30,
-    	"WAC": 31,
-    	"MEAC": 32,
-    	"SWAC": 33
-    };
+		"BIG12": 1,
+		"PAC12": 2,
+		"ACC": 3,
+		"BIGE": 4,
+		"BIG10": 5,
+		"SEC": 6,
+		"ATL10": 7,
+		"AAC": 8,
+		"COL": 9,
+		"MIDAM": 10,
+		"SUMM": 11,
+		"MWC": 12,
+		"MVC": 13,
+		"WCC": 14,
+		"BIGW": 15,
+		"IVY": 16,
+		"BELT": 17,
+		"SOUTH": 18,
+		"MAAC": 19,
+		"HORIZ": 20,
+		"OVC": 21,
+		"USA": 22,
+		"AEAST": 23,
+		"PAT": 24,
+		"BSOU": 25,
+		"WAC": 26,
+		"BSKY": 27,
+		"ASUN": 28,
+		"LAND": 29,
+		"NEA": 30,
+		"SWAC": 31,
+		"MEAC": 32
+	};
 
 	var getValue = function(team) {
 		var val = 0;
@@ -60,10 +60,6 @@ function (game, team1, team2) {
 
 		val += 5.5/Math.sqrt(team.official_rank+25);
 
-		if(team.name === 'Ole Miss') {
-			val *= team.rpi;
-		}
-
 		return val;
 	}
 
@@ -81,9 +77,9 @@ function (game, team1, team2) {
 		team1Value += Math.random() * 3 / seedDiff;
 	}
 
-  if (team1Value > team2Value) {
-    team1.winsGame();
-  } else {
-    team2.winsGame();
-  }
+	if (team1Value > team2Value) {
+		team1.winsGame();
+	} else {
+		team2.winsGame();
+	}
 }

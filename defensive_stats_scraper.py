@@ -27,7 +27,17 @@ NCAA_MAPPINGS = {
 	"UNI": "Northern Iowa",
 	"Albany (NY)": "Albany",
 	"St. John's (NY)": "St. John's",
-	"Eastern Wash.": "Eastern Washington"
+	"Eastern Wash.": "Eastern Washington",
+	"UConn": "Connecticut",
+	"Miami (FL)": "Miami (Fla.)",
+	"UNC Asheville": "UNC-Asheville",
+	"Saint Joseph's": "St. Joseph's",
+	"UNCW": "UNC-Wilmington",
+	"Texas A&M;": "Texas A&M",
+	"CSU Bakersfield": "Cal St. Bakersfield",
+	"FGCU": "Florida Gulf Coast",
+	"SFA": "Stephen F. Austin",
+	"Middle Tenn.": "Middle Tennessee"
 }
 
 def getUrl(year, stat_num, page_num):
@@ -79,7 +89,7 @@ def main():
 			teams_in_tourney = [line.rstrip() for line in file]
 	if teams_in_tourney:
 		team_map = {teamname: team_map[teamname] for teamname in teams_in_tourney}
-	
+
 	print(json.dumps(team_map))
 
 if __name__ == "__main__":

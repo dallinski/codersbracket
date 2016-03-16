@@ -13,3 +13,17 @@ dallinski201-dallinski250 were submitted using [2015_57.js](./2015_57.js) (using
 dallinski251-dallinski300 were submitted using [2015_50.js](./2015_50.js) (using [conference sos stats from 2016](http://www.cbssports.com/collegebasketball/bracketology/conference/rpi/2015-16))
 
 dallinski301-dallinski350 were submitted using [naive_cinderella.js](./naive_cinderella.js) (see http://www.ncaa.com/news/basketball-men/article/2016-01-30/march-madness-4-essential-ingredients-cinderella-run)
+
+dallinski351-dallinski400 were submitted using [cinderella.js](./cinderella.js) (see http://www.ncaa.com/news/basketball-men/article/2016-01-30/march-madness-4-essential-ingredients-cinderella-run)
+
+dallinski401-dallinski450 were submitted using [graduated_cinderella.js](./graduated_cinderella.js) (see http://www.ncaa.com/news/basketball-men/article/2016-01-30/march-madness-4-essential-ingredients-cinderella-run)
+
+dallinski451 was submitted using [true_shooting_percentage.js](./true_shooting_percentage.js) with a shooting tolerance of 0.02
+
+dallinski452 was submitted using [true_shooting_percentage.js](./true_shooting_percentage.js) with a shooting tolerance of 0.01
+
+dallinski453 was submitted using [true_shooting_percentage.js](./true_shooting_percentage.js) with a shooting tolerance of 0.03
+
+dallinski454 was submitted using [true_shooting_percentage.js](./true_shooting_percentage.js) with a shooting tolerance of 0.008
+
+dallinski455-dallinski500 were submitted using [true_shooting_percentage_with_randomness.js](./true_shooting_percentage_with_randomness.js) with a shooting tolerance of 0.02 (Duke and Michigan St. are highly favored by this algorithm)

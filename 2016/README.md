@@ -2,21 +2,17 @@ Out of 550 entries, 50 of mine placed in the top 100! I had all of the top 5 sub
 
 - Submitted 50 brackets using [random1.js](./algorithms/random1.js)
  - 5 of those brackets were in the 90th percentile or better
-    - ![bracket4](./images/4.png)
-    - ![bracket6](./images/6.png)
-    - ![bracket17](./images/17.png)
-    - ![bracket23](./images/23.png)
-    - ![bracket50](./images/50.png)
+    - <img src="./images/4.png" width="100" /><img src="./images/6.png" width="100" /><img src="./images/17.png" width="100" /><img src="./images/23.png" width="100" />#2 overall<img src="./images/50.png" width="300" />
  - 19 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [random2.js](./algorithms/random2.js)
  - 1 of those brackets were in the 90th percentile or better
-    - ![bracket71](./images/71.png)
+    - <img src="./images/71.png" width="100" />
  - 28 of those brackets were in the 40th percentile or worse
 
 - Submitted 1 bracket using [jsseph_mov_rpi.js](./algorithms/jsseph_mov_rpi.js) (I ran this algorithm 25 times and beyond the first round, the results were nearly identical, so I figured there was no need to submit multiple brackets using this algorithm)
  - It did well, scoring 940 points, which put it in the 94.7 percentile
- - 101
+ - <img src="./images/101.png" width="100" />
 
 - Submitted 24 brackets using [danmanstx.js](./algorithms/danmanstx.js)
  - This algorithm heavily favors UNC and Michigan State. Mostly it just likes higher seeds advancing.
@@ -25,65 +21,32 @@ Out of 550 entries, 50 of mine placed in the top 100! I had all of the top 5 sub
  
 - Submitted 75 brackets using [2015_57.js](./algorithms/2015_57.js) (using conference sos stats from 2015...oops!)
  - 6 of those brackets were in the 90th percentile or better
-    - ![bracket129](./images/129.png) 
-    - ![bracket134](./images/134.png)
-    - ![bracket149](./images/149.png)
-    - ![bracket175](./images/175.png)
-    - ![bracket191](./images/191.png)
-    - ![bracket194](./images/194.png)
+    - <img src="./images/129.png" width="100" /><img src="./images/134.png" width="100" /><img src="./images/149.png" width="100" /><img src="./images/175.png" width="100" /><img src="./images/191.png" width="100" /><img src="./images/194.png" width="100" />
  - 30 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [2015_57.js](./algorithms/2015_57.js) (using [conference sos stats from 2016](http://www.cbssports.com/collegebasketball/bracketology/conference/rpi/2015-16))
  - 5 of those brackets were in the 90th percentile or better
-    - ![bracket208](./images/208.png)
-    - ![bracket213](./images/213.png)
-    - ![bracket223](./images/223.png)
-    - ![bracket233](./images/233.png)
-    - ![bracket235](./images/235.png)
+    - <img src="./images/208.png" width="100" /><img src="./images/213.png" width="100" /><img src="./images/223.png" width="100" />#1 overall<img src="./images/233.png" width="300" /><img src="./images/235.png" width="100" />
  - 11 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [2015_50.js](./algorithms/2015_50.js) (using [conference sos stats from 2016](http://www.cbssports.com/collegebasketball/bracketology/conference/rpi/2015-16))
  - 9 of those brackets were in the 90th percentile or better
-    - ![bracket251](./images/251.png)
-    - ![bracket259](./images/259.png)
-    - ![bracket260](./images/260.png)
-    - ![bracket274](./images/274.png)
-    - ![bracket284](./images/284.png)
-    - ![bracket286](./images/286.png)
-    - ![bracket287](./images/287.png)
-    - ![bracket295](./images/295.png)
-    - ![bracket300](./images/300.png)
+    - <img src="./images/251.png" width="100" />#4 overall<img src="./images/259.png" width="300" /><img src="./images/260.png" width="100" /><img src="./images/274.png" width="100" /><img src="./images/284.png" width="100" /><img src="./images/286.png" width="100" /><img src="./images/287.png" width="100" /><img src="./images/295.png" width="100" /><img src="./images/300.png" width="100" />
  - 11 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [naive_cinderella.js](./algorithms/naive_cinderella.js)
  - 8 of those brackets were in the 90th percentile or better
-    - ![bracket309](./images/309.png)
-    - ![bracket312](./images/312.png)
-    - ![bracket315](./images/315.png)
-    - ![bracket325](./images/325.png)
-    - ![bracket333](./images/333.png)
-    - ![bracket336](./images/336.png)
-    - ![bracket341](./images/341.png)
-    - ![bracket349](./images/349.png)
+    - <img src="./images/309.png" width="100" /><img src="./images/312.png" width="100" /><img src="./images/315.png" width="100" /><img src="./images/325.png" width="100" /><img src="./images/333.png" width="100" /><img src="./images/336.png" width="100" /><img src="./images/341.png" width="100" />#3 overall<img src="./images/349.png" width="300" />
  - 15 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [cinderella.js](./algorithms/cinderella.js)
  - 6 of those brackets were in the 90th percentile or better
-    - ![bracket356](./images/356.png)
-    - ![bracket364](./images/364.png)
-    - ![bracket376](./images/376.png)
-    - ![bracket378](./images/378.png)
-    - ![bracket389](./images/389.png)
-    - ![bracket394](./images/394.png)
+    - <img src="./images/356.png" width="100" />#5 overall<img src="./images/364.png" width="300" /><img src="./images/376.png" width="100" /><img src="./images/378.png" width="100" /><img src="./images/389.png" width="100" /><img src="./images/394.png" width="100" />
  - 24 of those brackets were in the 40th percentile or worse
 
 - Submitted 50 brackets using [graduated_cinderella.js](./algorithms/graduated_cinderella.js)
  - 5 of those brackets were in the 90th percentile or better
-    - ![bracket408](./images/408.png)
-    - ![bracket411](./images/411.png)
-    - ![bracket440](./images/440.png)
-    - ![bracket441](./images/441.png)
-    - ![bracket450](./images/450.png)
+    - <img src="./images/408.png" width="100" /><img src="./images/411.png" width="100" /><img src="./images/440.png" width="100" /><img src="./images/441.png" width="100" /><img src="./images/450.png" width="100" />
  - 26 of those brackets were in the 40th percentile or worse
 
 - Submitted 4 brackets using [true_shooting_percentage.js](./algorithms/true_shooting_percentage.js)
@@ -100,9 +63,5 @@ Out of 550 entries, 50 of mine placed in the top 100! I had all of the top 5 sub
 
 - Submitted 50 brackets using [defense.js](./algorithms/defense.js)
  - 5 of those brackets were in the 90th percentile or better
-    - ![bracket511](./images/511.png)
-    - ![bracket519](./images/519.png)
-    - ![bracket537](./images/537.png)
-    - ![bracket538](./images/538.png)
-    - ![bracket549](./images/549.png)
+    - <img src="./images/511.png" width="100" /><img src="./images/519.png" width="100" /><img src="./images/537.png" width="100" /><img src="./images/538.png" width="100" /><img src="./images/549.png" width="100" />
  - 21 of those brackets were in the 40th percentile or worse

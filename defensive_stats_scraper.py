@@ -9,6 +9,18 @@ MIN_YEAR = 2010 # The NCAA stats pages only go back to 2010
 CURRENT_YEAR = date.today().year
 # define the columns given for a specific stat page on ncaa.com
 STAT_PAGE_MAPPINGS = {
+	# Offensive statistics
+	145: {'games_played': 2, 'total_points': 3, 'ppg': 4},
+	148: {'field_goals_made': 3, 'field_goals_attempted': 4, 'field_goal_pct': 5},
+	150: {'free_throws_made': 3, 'free_throws_attempted': 4, 'free_throw_pct': 5},
+	152: {'threes_made': 3, 'threes_attempted': 4, 'three_point_pct': 5},
+	168: {'wins': 2, 'losses': 3, 'win_pcts': 4},
+	932: {'off_reb': 3, 'def_reb': 4, 'total_reb': 5, 'reb_per_game': 6},
+	215: {'total_steals': 3, 'steals_per_game': 4},
+	214: {'total_blocks': 3, 'blocks_per_game': 4},
+	216: {'total_assists': 3, 'assists_per_game': 4},
+	217: {'turnovers': 3, 'turnovers_per_game': 4},
+	# end offensive statistics
 	149: {'opp_fg': 3, 'opp_fga': 4, 'opp_fg_per': 5}, # defensive fg%
 	518: {'opp_3p_fga': 3, 'opp_3p_fg': 4, 'opp_3p_fg_per': 5}, # def 3pt fg%
 	931: {'opp_tot_to': 3, 'opp_topg': 4}, # turnovers forced

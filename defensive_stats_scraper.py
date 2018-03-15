@@ -46,7 +46,7 @@ def getStats(year, stat_num, team_map, stat_map):
         teams = soup.find_all('tr')
         for teamHtml in teams:
             name = teamHtml.find_next('a').string
-            print("Getting stats on page" + page_num + " for " + name)
+            print("Getting stats on page {} for {}".format(page_num, name))
             if name in team_map:
                 team = team_map[name]
             else:

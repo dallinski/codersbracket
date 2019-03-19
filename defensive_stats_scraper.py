@@ -1,6 +1,8 @@
+#!/usr/bin/env python2
+
 from bs4 import BeautifulSoup
 from datetime import date
-import urllib2
+from urllib.request import urlopen, Request
 import json
 import argparse
 
@@ -29,6 +31,7 @@ STAT_PAGE_MAPPINGS = {
     146: {'opp_tot_pts': 3, 'opp_ppg': 4},  # scoring defense
     286: {'tot_pf': 3, 'pfpg': 4, 'dq': 5}  # fouls per game
 }
+UNMATCHED_RPI_VALUES = []
 
 
 def getUrl(year, stat_num, page_num):
@@ -36,8 +39,8 @@ def getUrl(year, stat_num, page_num):
 
 
 def getHtml(url):
-    req = urllib2.Request(url, headers={'User-Agent': "Magic Browser"})
-    return urllib2.urlopen(req)
+    req = Request(url, headers={'User-Agent': "Magic Browser"})
+    return urlopen(req)
 
 
 def getStats(year, stat_num, team_map, stat_map):
@@ -53,9 +56,53 @@ def getStats(year, stat_num, team_map, stat_map):
                 team = {}
             tds = teamHtml.find_all('td')
             if len(tds) > 0:
-                for statName, index in stat_map.iteritems():
+                for statName, index in stat_map.items():
                     team[statName] = tds[index].string
                 team_map[name] = team
+
+def getRanking(team_map):
+    soup = BeautifulSoup(getHtml('http://www.ncaa.com/rankings/basketball-men/d1/ncaa-mens-basketball-net-rankings'), 'html.parser')
+    teams = soup.find_all('tr')
+    for teamHtml in teams:
+        allColumns = teamHtml.find_all('td')
+        if (len(allColumns) > 0):
+            rank = allColumns[0].string
+            name = allColumns[2].string
+            conference = allColumns[3].string
+            if name in team_map:
+                team = team_map[name]
+            else:
+                team = {}
+            team['name'] = name
+            team['conf'] = conference
+            team['official_rank'] = rank
+            team_map[name] = team
+
+def getRPI(team_map):
+    soup = BeautifulSoup(getHtml('https://www.teamrankings.com/ncaa-basketball/rpi-ranking/rpi-rating-by-team'), 'html.parser')
+    teams = soup.find_all('tr')
+    for teamHtml in teams:
+        allColumns = teamHtml.find_all('td')
+        if (len(allColumns) > 0):
+            name = teamHtml.find_next('a').string
+            try:
+                rpi = teamHtml.find_next('td', class_='rank').string
+                if name in team_map:
+                    team_map[name]['rpi'] = rpi
+                else:
+                    UNMATCHED_RPI_VALUES.append({'name': name, 'rpi': rpi})
+            except:
+                break
+
+def manuallyFillRPI(team_map):
+    print('unmatched rpi values ----------------------------------')
+    for idx, unmatched_rpi in enumerate(UNMATCHED_RPI_VALUES):
+        print('%d: %s' % (idx, unmatched_rpi))
+    print('-------------------------------------------------------')
+    for team_name in team_map:
+        if not 'rpi' in team_map[team_name]:
+            rpi_index = int(input('Which team is ' + team_name + '?\n'))
+            team_map[team_name]['rpi'] = UNMATCHED_RPI_VALUES[rpi_index]['rpi']
 
 
 def year(year):
@@ -74,7 +121,12 @@ def main():
     args = parser.parse_args()
 
     team_map = dict()
-    for stat_num, stat_map in STAT_PAGE_MAPPINGS.iteritems():
+
+    if args.year == CURRENT_YEAR:
+        getRanking(team_map)
+        getRPI(team_map)
+
+    for stat_num, stat_map in STAT_PAGE_MAPPINGS.items():
         getStats(args.year, stat_num, team_map, stat_map)
 
     teams_in_tourney = None
@@ -83,6 +135,8 @@ def main():
             teams_in_tourney = [line.rstrip() for line in file]
     if teams_in_tourney:
         team_map = {teamname: team_map[teamname] for teamname in teams_in_tourney}
+        if args.year == CURRENT_YEAR:
+            manuallyFillRPI(team_map)
 
     print(json.dumps(team_map))
 

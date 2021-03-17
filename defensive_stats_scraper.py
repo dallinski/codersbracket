@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
 from datetime import date
@@ -31,25 +31,221 @@ STAT_PAGE_MAPPINGS = {
     146: {'opp_tot_pts': 3, 'opp_ppg': 4},  # scoring defense
     286: {'tot_pf': 3, 'pfpg': 4, 'dq': 5}  # fouls per game
 }
+RPI_TEAM_NAME_MAPPING = {
+    # name on RPI website : name on NCAA website
+    'Ohio State': 'Ohio St.',
+    'W Virginia': 'West Virginia',
+    'Florida St': 'Florida St.',
+    'Loyola-Chi': 'Loyola Chicago',
+    'San Diego St': 'San Diego St.',
+    'USC': 'Southern California',
+    'St Bonavent': 'St. Bonaventure',
+    'Oklahoma St': 'Oklahoma St.',
+    'Boise State': 'Boise St.',
+    'Connecticut': 'UConn',
+    'GA Tech': 'Georgia Tech',
+    'N Carolina': 'North Carolina',
+    'Colorado St': 'Colorado St.',
+    'VA Tech': 'Virginia Tech',
+    'Utah State': 'Utah St.',
+    'UCSB': 'UC Santa Barbara',
+    'Penn State': 'Penn St.',
+    'S Methodist': 'SMU',
+    'Mississippi': 'Ole Miss',
+    'Wright State': 'Wright St.',
+    'Wichita St': 'Wichita St.',
+    'St Marys': 'Saint Mary\'s (CA)',
+    'LA Tech': 'Louisiana Tech',
+    'St Johns': 'St. John\'s (NY)',
+    'W Kentucky': 'Western Ky.',
+    'Michigan St': 'Michigan St.',
+    'Miss State': 'Mississippi St.',
+    'Abl Christian': 'Abilene Christian',
+    'NC-Grnsboro': 'UNC Greensboro',
+    'Missouri St': 'Missouri St.',
+    'Kent State': 'Kent St.',
+    'Loyola Mymt': 'LMU (CA)',
+    'Wash State': 'Washington St.',
+    'Weber State': 'Weber St.',
+    'Central FL': 'UCF',
+    'Arizona St': 'Arizona St.',
+    'Oregon St': 'Oregon St.',
+    'S Carolina': 'South Carolina',
+    'E Washingtn': 'Eastern Wash.',
+    'TX Christian': 'TCU',
+    'San Fransco': 'San Francisco',
+    'U Mass': 'Massachusetts',
+    'S Dakota St': 'South Dakota St.',
+    'Army': 'Army West Point',
+    'Indiana St': 'Indiana St.',
+    'Geo Mason': 'George Mason',
+    'Bowling Grn': 'Bowling Green',
+    'Maryland BC': 'UMBC',
+    'James Mad': 'James Madison',
+    'E Tenn St': 'ETSU',
+    'Morehead St': 'Morehead St.',
+    'Grd Canyon': 'Grand Canyon',
+    'Georgia St': 'Georgia St.',
+    'S Utah': 'Southern Utah',
+    'Northeastrn': 'Northeastern',
+    'VA Military': 'VMI',
+    'Texas State': 'Texas St.',
+    'Cleveland St': 'Cleveland St.',
+    'Sam Hous St': 'Sam Houston',
+    'E Kentucky': 'Eastern Ky.',
+    'Jksnville St': 'Jacksonville St.',
+    'Coastal Car': 'Coastal Carolina',
+    'LA Lafayette': 'Lafayette',
+    'S Alabama': 'South Alabama',
+    'St Peters': 'Saint Peter\'s',
+    'Morgan St': '',
+    'TX Southern': 'Texas Southern',
+    'CS Bakersfld': '',
+    'Mt St Marys': 'Mount St. Mary\'s',
+    'TX El Paso': '',
+    'Nicholls St': '',
+    'S Florida': '',
+    'N Kentucky': '',
+    'Norfolk St': 'Norfolk St.',
+    'Ste F Austin': '',
+    'E Carolina': '',
+    'TX-San Ant': '',
+    'Kansas St': '',
+    'Sacred Hrt': '',
+    'AR Lit Rock': '',
+    'Ball State': '',
+    'Citadel': '',
+    'Fresno St': '',
+    'TX-Arlington': '',
+    'Jackson St': '',
+    'Boston U': '',
+    'N Iowa': '',
+    'N Dakota St': '',
+    'Detroit': '',
+    'St Fran (NY)': '',
+    'W Carolina': '',
+    'Mass Lowell': '',
+    'Montana St': '',
+    'Coppin State': '',
+    'WI-Milwkee': '',
+    'S Illinois': '',
+    'NC-Asheville': '',
+    'Wm & Mary': '',
+    'CS Fullerton': '',
+    'Youngs St': '',
+    'St Josephs': 'Saint Joseph\'s',
+    'Fla Atlantic': '',
+    'Gard-Webb': '',
+    'Albany': '',
+    'GA Southern': '',
+    'Iowa State': '',
+    'Murray St': '',
+    'F Dickinson': '',
+    'N Hampshire': '',
+    'Utah Val St': '',
+    'Cal St Nrdge': '',
+    'NW State': '',
+    'Sac State': '',
+    'Grambling St': '',
+    'Loyola-MD': '',
+    'Arkansas St': '',
+    'NC A&T': '',
+    'TX-Pan Am': '',
+    'St Fran (PA)': '',
+    'SE Missouri': '',
+    'Illinois St': '',
+    'N Arizona': '',
+    'Southern': '',
+    'WI-Grn Bay': '',
+    'Col Charlestn': '',
+    'Geo Wshgtn': '',
+    'SIU Edward': '',
+    'N Florida': '',
+    'Boston Col': '',
+    'Cal Baptist': '',
+    'N Alabama': '',
+    'TN Martin': '',
+    'Alcorn State': '',
+    'Central Ark': '',
+    'Central Conn': '',
+    'W Michigan': '',
+    'IPFW': '',
+    'N Mex State': '',
+    'NC-Wilmgton': '',
+    'Fla Gulf Cst': '',
+    'Tarleton State': '',
+    'SC Upstate': '',
+    'SE Louisiana': '',
+    'UMKC': '',
+    'IL-Chicago': '',
+    'LA Monroe': '',
+    'N Colorado': '',
+    'E Illinois': '',
+    'Alab A&M': '',
+    'Lg Beach St': '',
+    'TN Tech': '',
+    'Dixie State': '',
+    'Portland St': '',
+    'S Mississippi': '',
+    'Idaho State': '',
+    'Middle Tenn': '',
+    'San Jose St': '',
+    'Seattle': '',
+    'Lamar': '',
+    'E Michigan': '',
+    'Florida Intl': '',
+    'Rob Morris': '',
+    'Charl South': '',
+    'Neb Omaha': '',
+    'Houston Bap': '',
+    'Central Mich': '',
+    'W Illinois': '',
+    'NC Central': '',
+    'TN State': '',
+    'Miss Val St': '',
+    'Ark Pine Bl': '',
+    'N Illinois': '',
+    'Kennesaw St': '',
+    'Incar Word': '',
+    'Chicago St': '',
+    'McNeese St': '',
+    'Alabama St': '',
+    'TX A&M-CC': '',
+    'Delaware St': '',
+    'S Car State': '',
+    'Yale': '',
+    'Cornell': '',
+    'Columbia': '',
+    'Brown': '',
+    'Harvard': '',
+    'Dartmouth': '',
+    'Princeton': '',
+    'U Penn': '',
+    'Beth-Cook': '',
+    'Maryland ES': ''
+}
 UNMATCHED_RPI_VALUES = []
 
 
-def getUrl(year, stat_num, page_num):
+def get_url(year, stat_num, page_num):
+    if year == CURRENT_YEAR:
+        year = 'current'
     return 'http://www.ncaa.com/stats/basketball-men/d1/{}/team/{}/p{}'.format(year, stat_num, page_num)
 
 
-def getHtml(url):
+def get_html(url):
     req = Request(url, headers={'User-Agent': "Magic Browser"})
     return urlopen(req)
 
 
-def getStats(year, stat_num, team_map, stat_map):
+def get_stats(year, stat_num, team_map, stat_map, debug):
     for page_num in [1, 2, 3, 4, 5, 6, 7]:
-        soup = BeautifulSoup(getHtml(getUrl(year, stat_num, page_num)), 'html.parser')
+        soup = BeautifulSoup(get_html(get_url(year, stat_num, page_num)), 'html.parser')
         teams = soup.find_all('tr')
         for teamHtml in teams:
             name = teamHtml.find_next('a').string
-            print("Getting stats on page {} for {}".format(page_num, name))
+            if debug:
+                print("Getting stats on page {} for {}".format(page_num, name))
             if name in team_map:
                 team = team_map[name]
             else:
@@ -60,8 +256,9 @@ def getStats(year, stat_num, team_map, stat_map):
                     team[statName] = tds[index].string
                 team_map[name] = team
 
-def getRanking(team_map):
-    soup = BeautifulSoup(getHtml('http://www.ncaa.com/rankings/basketball-men/d1/ncaa-mens-basketball-net-rankings'), 'html.parser')
+
+def get_ranking(team_map):
+    soup = BeautifulSoup(get_html('http://www.ncaa.com/rankings/basketball-men/d1/ncaa-mens-basketball-net-rankings'), 'html.parser')
     teams = soup.find_all('tr')
     for teamHtml in teams:
         allColumns = teamHtml.find_all('td')
@@ -78,23 +275,40 @@ def getRanking(team_map):
             team['official_rank'] = rank
             team_map[name] = team
 
-def getRPI(team_map):
-    soup = BeautifulSoup(getHtml('https://www.teamrankings.com/ncaa-basketball/rpi-ranking/rpi-rating-by-team'), 'html.parser')
+def get_rpi(team_map):
+    soup = BeautifulSoup(get_html('https://www.teamrankings.com/ncaa-basketball/rpi-ranking/rpi-rating-by-team'),
+                         'html.parser')
     teams = soup.find_all('tr')
     for teamHtml in teams:
-        allColumns = teamHtml.find_all('td')
-        if (len(allColumns) > 0):
+        all_columns = teamHtml.find_all('td')
+        if len(all_columns) > 0:
             name = teamHtml.find_next('a').string
             try:
                 rpi = teamHtml.find_next('td', class_='rank').string
+
+                if name in team_map:
+                    team = team_map[name]
+                else:
+                    team = {}
+
                 if name in team_map:
                     team_map[name]['rpi'] = rpi
+                elif name in RPI_TEAM_NAME_MAPPING:
+                    if RPI_TEAM_NAME_MAPPING[name] in team_map:
+                        team = team_map[RPI_TEAM_NAME_MAPPING[name]]
+                    else:
+                        team = {'name': RPI_TEAM_NAME_MAPPING[name]}
+                        UNMATCHED_RPI_VALUES.append({'name': name, 'rpi': rpi})
+                    team['rpi'] = rpi
+                    team_map[RPI_TEAM_NAME_MAPPING[name]] = team
                 else:
-                    UNMATCHED_RPI_VALUES.append({'name': name, 'rpi': rpi})
+                    print('Cannot determine rpi for {}'.format(name))
+                    # raise Exception('Cannot determine rpi for {}'.format(name))
             except:
                 break
 
-def manuallyFillRPI(team_map):
+
+def manually_fill_rpi(team_map):
     print('unmatched rpi values ----------------------------------')
     for idx, unmatched_rpi in enumerate(UNMATCHED_RPI_VALUES):
         print('%d: %s' % (idx, unmatched_rpi))
@@ -105,7 +319,7 @@ def manuallyFillRPI(team_map):
             team_map[team_name]['rpi'] = UNMATCHED_RPI_VALUES[rpi_index]['rpi']
 
 
-def year(year):
+def year_input(year):
     year = int(year)
     if not MIN_YEAR <= year <= CURRENT_YEAR:
         raise argparse.ArgumentTypeError("Year specified must be between {} and {}".format(MIN_YEAR, CURRENT_YEAR))
@@ -114,20 +328,21 @@ def year(year):
 
 def main():
     parser = argparse.ArgumentParser(description='Get defensive stats for a given year')
-    parser.add_argument('-y', '--year', type=year, help='Year (between {} and {})'.format(MIN_YEAR, CURRENT_YEAR),
+    parser.add_argument('-y', '--year', type=year_input, help='Year (between {} and {})'.format(MIN_YEAR, CURRENT_YEAR),
                         default=CURRENT_YEAR)
     parser.add_argument('-t', '--teams', type=str,
                         help='Path to text file containing list of teams to filter by (teams in the tourney)')
+    parser.add_argument('-d', '--debug', type=bool, help='Print debug logs')
     args = parser.parse_args()
 
     team_map = dict()
 
     if args.year == CURRENT_YEAR:
-        getRanking(team_map)
-        getRPI(team_map)
+        get_ranking(team_map)
+        get_rpi(team_map)
 
     for stat_num, stat_map in STAT_PAGE_MAPPINGS.items():
-        getStats(args.year, stat_num, team_map, stat_map)
+        get_stats(args.year, stat_num, team_map, stat_map, args.debug)
 
     teams_in_tourney = None
     if args.teams:
@@ -136,7 +351,7 @@ def main():
     if teams_in_tourney:
         team_map = {teamname: team_map[teamname] for teamname in teams_in_tourney}
         if args.year == CURRENT_YEAR:
-            manuallyFillRPI(team_map)
+            manually_fill_rpi(team_map)
 
     print(json.dumps(team_map))
 
